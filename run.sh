@@ -48,8 +48,28 @@ for i in {0..9}; do
             printf msg;
         }
     }
+    function hl_5943(msg) {
+        ip_list["59.43.*"]=msg
+        ip_list["202.97.*"]=msg
+        flag=0
+        for(hl in ip_list){
+            if(match(msg, hl)){
+                flag=1;
+            }
+        }
+        if(flag == 1)
+        {
+            printf "\033[35m"msg"\033[0m";
+        }
+        else
+        {
+            printf msg;
+        }
+    }
     {
-        printf $1FS$2FS$3FS
+        printf $1FS
+        hl_5943($2)
+        printf FS$3FS
         hl_AS($4)
         printf FS$5FS$6"\n"
     }'
