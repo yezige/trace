@@ -48,9 +48,9 @@ function green() {
 # ---基础函数---
 
 # ---主流程---
-if [ ! -f "./besttrace4linux/besttrace" ]; then
+if [ ! -f "~/besttrace4linux/besttrace" ]; then
     # get besttrace4linux
-    if [ ! -f "besttrace4linux.zip" ]; then
+    if [ ! -f "~/besttrace4linux.zip" ]; then
         wget https://cdn.ipip.net/17mon/besttrace4linux.zip
     fi
 
@@ -64,7 +64,7 @@ if [ ! -f "./besttrace4linux/besttrace" ]; then
     chmod +x ./besttrace4linux/besttrace
 fi
 
-cd besttrace4linux
+cd ~/besttrace4linux
 
 # clear
 
