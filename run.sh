@@ -86,7 +86,7 @@ if [ $# -ne 0 ]; then
     ip_addr=(${ip_addr_add[*]} ${ip_addr[*]})
 fi
 
-for i in {0..9}; do
+for i in "${!ip_list[@]}"; do
     green ${ip_addr[$i]}
     ${workdir}/besttrace -q 1 ${ip_list[$i]} | awk 'BEGIN {
         FS="  "
