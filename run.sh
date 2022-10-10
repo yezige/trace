@@ -1,13 +1,63 @@
 #!/bin/bash
 
+# ---基础函数---
+install() {
+    pkg=$1
+    if grep -Eqii "CentOS" /etc/issue || grep -Eq "CentOS" /etc/*-release; then
+        DISTRO='CentOS'
+        PM='yum'
+    elif grep -Eqi "Red Hat Enterprise Linux Server" /etc/issue || grep -Eq "Red Hat Enterprise Linux Server" /etc/*-release; then
+        DISTRO='RHEL'
+        PM='yum'
+    elif grep -Eqi "Aliyun" /etc/issue || grep -Eq "Aliyun" /etc/*-release; then
+        DISTRO='Aliyun'
+        PM='yum'
+    elif grep -Eqi "Fedora" /etc/issue || grep -Eq "Fedora" /etc/*-release; then
+        DISTRO='Fedora'
+        PM='yum'
+    elif grep -Eqi "Debian" /etc/issue || grep -Eq "Debian" /etc/*-release; then
+        DISTRO='Debian'
+        PM='apt'
+    elif grep -Eqi "Ubuntu" /etc/issue || grep -Eq "Ubuntu" /etc/*-release; then
+        DISTRO='Ubuntu'
+        PM='apt'
+    elif grep -Eqi "Raspbian" /etc/issue || grep -Eq "Raspbian" /etc/*-release; then
+        DISTRO='Raspbian'
+        PM='apt'
+    else
+        DISTRO='unknow'
+        PM='unknow'
+    fi
+    echo "当前系统: ${DISTRO}"
+
+    if [ "$PM" = 'yum' ]; then
+        echo "执行 yum install -y ${pkg} 命令"
+        yum install -y $pkg
+    elif [ "$PM" = 'apt' ]; then
+        echo "执行 apt-get install -y ${pkg} 命令"
+        apt-get install -y $pkg
+    else
+        echo "系统不受支持, 脚本只支持 Linux 系统"
+        exit 1
+    fi
+}
+
+function green() {
+    printf "\033[42m$1\033[0m\n"
+}
+# ---基础函数---
+
+# ---主流程---
 if [ ! -f "./besttrace4linux/besttrace" ]; then
     # get besttrace4linux
-    wget https://cdn.ipip.net/17mon/besttrace4linux.zip
+    if [ ! -f "besttrace4linux.zip" ]; then
+        wget https://cdn.ipip.net/17mon/besttrace4linux.zip
+    fi
 
     # uzip
     mkdir -p besttrace4linux
     if [ -z $(command -v unzip) ]; then
-        echo "Need install unzip: \"sudo apt-get install zip\" or \"sudo yum install zip\""
+        install "zip"
     fi
     unzip -o besttrace4linux.zip -d ./besttrace4linux
 
@@ -17,10 +67,6 @@ fi
 cd besttrace4linux
 
 # clear
-
-function green() {
-    printf "\033[42m$1\033[0m\n"
-}
 
 ip_list=(219.141.147.210 202.106.50.1 221.179.155.161 202.96.209.133 210.22.97.1 211.136.112.200 58.60.188.222 210.21.196.6 120.196.165.24 202.112.14.151)
 ip_addr=(北京电信 北京联通 北京移动 上海电信 上海联通 上海移动 深圳电信 深圳联通 深圳移动 成都教育网)
@@ -100,3 +146,4 @@ for i in {0..9}; do
         printf FS$5FS$6"\n"
     }'
 done
+# ---主流程---
