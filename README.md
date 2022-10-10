@@ -30,3 +30,10 @@ Supports testing the details of the route jump of the input IP, for example, the
 ```bash
 wget liu.app/s/trace && sh trace google.com
 ```
+
+## Something wrong
+
+- error: `socket: operation not permitted` 使用 sudo 或 root 权限即可
+
+  - Usage 1: `curl liu.app/s/trace | sudo bash`
+  - Usage 2: `wget liu.app/s/trace && sudo sh trace google.com`

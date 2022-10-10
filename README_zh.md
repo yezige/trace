@@ -26,3 +26,10 @@ curl liu.app/s/trace | bash
 ```bash
 wget liu.app/s/trace && sh trace google.com
 ```
+
+## 遇到问题
+
+- error: `socket: operation not permitted` 使用 sudo 或 root 权限即可
+
+  - 用法 1: `curl liu.app/s/trace | sudo bash`
+  - 用法 2: `wget liu.app/s/trace && sudo sh trace google.com`
