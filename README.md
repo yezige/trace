@@ -31,6 +31,10 @@ Supports testing the details of the route jump of the input IP, for example, the
 wget liu.app/s/trace && sh trace google.com
 ```
 
+## Screenshot
+
+![screenshot](https://raw.githubusercontent.com/yezige/trace/master/images/screenshot.png)
+
 ## Something wrong
 
 - error: `socket: operation not permitted` Use sudo or root permission

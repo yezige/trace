@@ -27,6 +27,10 @@ curl liu.app/s/trace | bash
 wget liu.app/s/trace && sh trace google.com
 ```
 
+## 相关截图
+
+![screenshot](https://raw.githubusercontent.com/yezige/trace/master/images/screenshot.png)
+
 ## 遇到问题
 
 - error: `socket: operation not permitted` 使用 sudo 或 root 权限即可
