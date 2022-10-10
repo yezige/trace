@@ -57,7 +57,7 @@ if [ ! -f "./besttrace4linux/besttrace" ]; then
     # uzip
     mkdir -p besttrace4linux
     if [ -z $(command -v unzip) ]; then
-        install zip
+        install unzip
     fi
     unzip -o besttrace4linux.zip -d ./besttrace4linux
 
