@@ -51,7 +51,7 @@ function green() {
 workdir=/tmp/besttrace4linux
 if [ ! -f "${workdir}/besttrace" ]; then
     mkdir -p ${workdir}
-    
+
     # get besttrace4linux
     if [ ! -f "${workdir}/besttrace4linux.zip" ]; then
         if [ -z $(command -v wget) ]; then
@@ -74,6 +74,18 @@ clear
 ip_list=(219.141.147.210 202.106.50.1 221.179.155.161 202.96.209.133 210.22.97.1 211.136.112.200 58.60.188.222 210.21.196.6 120.196.165.24 202.112.14.151)
 ip_addr=(北京电信 北京联通 北京移动 上海电信 上海联通 上海移动 深圳电信 深圳联通 深圳移动 成都教育网)
 
+# 增加入参到待traceroute列表
+if [ $# -ne 0 ]; then
+    ip_list_add=()
+    ip_addr_add=()
+    for i in $*; do
+        ip_list_add[${#ip_list_add[*]}]=$i
+        ip_addr_add[${#ip_addr_add[*]}]=$i
+    done
+    ip_list=(${ip_list_add[*]} ${ip_list[*]})
+    ip_addr=(${ip_addr_add[*]} ${ip_addr[*]})
+fi
+
 for i in {0..9}; do
     green ${ip_addr[$i]}
     ${workdir}/besttrace -q 1 ${ip_list[$i]} | awk 'BEGIN {
@@ -81,13 +93,14 @@ for i in {0..9}; do
     }
     function hl_AS(msg) {
         as_list["AS4134"]="AS4134,电信163"
-        as_list["AS4809"]="AS4809,CN2"
+        as_list["AS4809"]="AS4809,电信CN2"
         as_list["AS4837"]="AS4837,联通169"
         as_list["AS9929"]="AS9929,联通A网"
-        as_list["AS10099"]="AS10099,联通国际"
-        as_list["AS58453"]="AS58453,CMI"
-        as_list["AS9808"]="AS9808,CMNET"
-        as_list["AS4538"]="AS4538,CERNET"
+        as_list["AS9808"]="AS9808,CMNET移动骨干"
+        as_list["AS23764"]="AS10099,CTG电信国际"
+        as_list["AS10099"]="AS10099,CUG联通国际"
+        as_list["AS58453"]="AS58453,CMI移动国际"
+        as_list["AS4538"]="AS4538,CERNET教育网"
         as_list["AS9929"]="AS9929,CU-VIP"
         as_list["AS2914"]="AS2914,NTT"
         as_list["AS2497"]="AS2497,IIJ"
