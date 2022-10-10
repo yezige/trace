@@ -33,7 +33,7 @@ wget liu.app/s/trace && sh trace google.com
 
 ## Something wrong
 
-- error: `socket: operation not permitted` 使用 sudo 或 root 权限即可
+- error: `socket: operation not permitted` Use sudo or root permission
 
   - Usage 1: `curl liu.app/s/trace | sudo bash`
   - Usage 2: `wget liu.app/s/trace && sudo sh trace google.com`
