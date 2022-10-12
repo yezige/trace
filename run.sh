@@ -101,7 +101,6 @@ for i in "${!ip_list[@]}"; do
         as_list["AS10099"]="AS10099,CUG联通国际"
         as_list["AS58453"]="AS58453,CMI移动国际"
         as_list["AS4538"]="AS4538,CERNET教育网"
-        as_list["AS9929"]="AS9929,CU-VIP"
         as_list["AS2914"]="AS2914,NTT"
         as_list["AS2497"]="AS2497,IIJ"
         as_list["AS2516"]="AS2516,KDDI"
