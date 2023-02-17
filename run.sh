@@ -49,6 +49,29 @@ function green() {
 
 # ---主流程---
 workdir=/tmp/besttrace4linux
+
+# 计算当前平台
+case $(uname -m) in
+i686* | i386*)
+    plat="32"
+    ;;
+x86_64)
+    plat=""
+    ;;
+aarch64* | arm | armv8b | armv8l)
+    plat="arm"
+    ;;
+amd64)
+    plat="bsd"
+    ;;
+*)
+    plat=""
+    ;;
+esac
+echo "当前平台：${plat}"
+exec_name=besttrace${plat}
+echo "可执行文件：${exec_name}"
+
 if [ ! -f "${workdir}/besttrace" ]; then
     mkdir -p ${workdir}
 
@@ -66,25 +89,7 @@ if [ ! -f "${workdir}/besttrace" ]; then
     fi
     unzip -o ${workdir}/besttrace4linux.zip -d ${workdir}
 
-    case $(uname -m) in
-    i686* | i386*)
-        plat="32"
-        ;;
-    x86_64)
-        plat=""
-        ;;
-    aarch64* | arm | armv8b | armv8l)
-        plat="arm"
-        ;;
-    amd64)
-        plat="bsd"
-        ;;
-    *)
-        plat=""
-        ;;
-    esac
-    echo "当前平台：${plat}"
-    chmod +x ${workdir}/besttrace${plat}
+    chmod +x ${workdir}/$exec_name
 fi
 
 clear
@@ -106,7 +111,7 @@ fi
 
 for i in "${!ip_list[@]}"; do
     green ${ip_addr[$i]}
-    ${workdir}/besttrace${plat} -q 1 ${ip_list[$i]} | awk 'BEGIN {
+    ${workdir}/$exec_name -q 1 ${ip_list[$i]} | awk 'BEGIN {
         FS="  "
     }
     function hl_AS(msg) {
