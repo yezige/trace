@@ -106,7 +106,7 @@ fi
 
 for i in "${!ip_list[@]}"; do
     green ${ip_addr[$i]}
-    ${workdir}/besttrace -q 1 ${ip_list[$i]} | awk 'BEGIN {
+    ${workdir}/besttrace${plat} -q 1 ${ip_list[$i]} | awk 'BEGIN {
         FS="  "
     }
     function hl_AS(msg) {
