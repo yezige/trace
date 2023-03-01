@@ -188,7 +188,7 @@ done
 
 # ---speedtest-cli
 # 校验python
-if [ -z $(command -v python3) ]; then
+if [ -z $(command -v python) -a -z $(command -v python3) ]; then
     install python3
 fi
 # 下载speedtest.py
