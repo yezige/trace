@@ -184,4 +184,15 @@ for i in "${!ip_list[@]}"; do
         printf FS$5FS$6"\n"
     }'
 done
+
+# ---speedtest-cli
+# 校验python
+if [ -z $(command -v python) ]; then
+    install python
+fi
+# 下载speedtest.py
+wget -O /tmp/speedtest-cli https://raw.githubusercontent.com/sivel/speedtest-cli/master/speedtest.py
+chmod +x /tmp/speedtest-cli
+
+/tmp/speedtest-cli
 # ---主流程---
