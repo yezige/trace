@@ -35,6 +35,7 @@ install() {
         yum install -y $pkg
     elif [ "$PM" = 'apt' ]; then
         echo "执行 apt-get install -y ${pkg} 命令"
+        apt-get update
         apt-get install -y $pkg
     else
         echo "系统不受支持, 脚本只支持 Linux 系统"
