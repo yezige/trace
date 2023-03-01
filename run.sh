@@ -196,8 +196,8 @@ if [ -z $(command -v python) ]; then
     py=python3
 fi
 # 下载speedtest.py
-wget -OP /tmp https://raw.githubusercontent.com/sivel/speedtest-cli/master/speedtest.py
+wget -O -P /tmp https://raw.githubusercontent.com/sivel/speedtest-cli/master/speedtest.py
 
-py /tmp/speedtest.py
+$py /tmp/speedtest.py
 
 # ---主流程---
