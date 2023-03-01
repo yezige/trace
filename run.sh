@@ -188,12 +188,16 @@ done
 
 # ---speedtest-cli
 # 校验python
-if [ -z $(command -v python) -a -z $(command -v python3) ]; then
-    install python3
+py=python
+if [ -z $(command -v python) ]; then
+    if [ -z $(command -v python3) ]; then
+        install python3
+    fi
+    py=python3
 fi
 # 下载speedtest.py
-wget -P /tmp https://raw.githubusercontent.com/sivel/speedtest-cli/master/speedtest.py
+wget -OP /tmp https://raw.githubusercontent.com/sivel/speedtest-cli/master/speedtest.py
 
-python3 /tmp/speedtest.py
+py /tmp/speedtest.py
 
 # ---主流程---
