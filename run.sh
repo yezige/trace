@@ -81,7 +81,7 @@ if [ ! -f "${workdir}/besttrace" ]; then
         if [ -z $(command -v wget) ]; then
             install wget
         fi
-        wget -P $workdir https://cdn.ipip.net/17mon/besttrace4linux.zip
+        wget -P $workdir https://github.com/yezige/trace/raw/main/besttrace4linux.zip
     fi
 
     # uzip
